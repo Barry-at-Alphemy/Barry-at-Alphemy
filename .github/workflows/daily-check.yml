@@ -34,7 +34,8 @@ jobs:
       run: |
         git config --global user.name "GitHub Action Bot"
         git config --global user.email "actions@github.com"
-        git add last_hash.txt
-        # Pull any recent changes first, then commit and push
+        # Pull any online updates before doing anything with local changes
         git pull origin main --rebase
+        
+        git add last_hash.txt
         git diff --quiet && git diff --staged --quiet || (git commit -m "Update tracking hash [skip ci]" && git push)
